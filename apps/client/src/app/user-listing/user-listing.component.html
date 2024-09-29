@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <div class="title">User Listing 🎉</div>
+    <button (click)="logout()">Logout</button>
+    <div class="description"></div>
+    <!-- for adding shadows-->
+    <div class="list-wrapper">
+      <!-- scrollable area-->
+      <div class="list">
+        
+        <div *ngIf="users.length > 0">
+            <div *ngFor="let user of users" class="event">
+                <div class="event-name">{{ user.username }}</div>
+                <div class="event-date">{{ user.email }}</div>
+              </div>
+        </div>
+          
+        <div *ngIf="users.length === 0">
+            <p>No User Data Found.</p>
+        </div>
+      </div>
+    </div>
+  </div>

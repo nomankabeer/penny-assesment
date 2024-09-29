@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$primary-color: #8ec0ac;
+$light-color: #fffbef;
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 100vmax / 1600 * 100;
+  @media (max-width: 992px) {
+    font-size: 60px;
+  }
+}
+body {
+  min-height: 100vh;
+  padding: 0.3rem;
+  @include flexCenter;
+  
+  background-color: $light-color;
+  
+  font-size: 0.26rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.wrapper {
+//   width: 1.5rem;
+  max-width: 100%;
+  padding: 0.3rem 0.5rem;
+  
+  color: $light-color;
+  background-color: $primary-color;
+  border-radius: 0.2rem;
+  box-shadow: 0 0 10px #0002;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.description {
+  font-weight: 200;
+  font-size: 0.85em;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.list-wrapper {
+  width: 100%;
+  position: relative;
+  
+  &:before, &:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0.5rem;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  &:before {
+    top: 0;
+    background-image: linear-gradient($primary-color, transparent);
+  }
+  &:after {
+    bottom: 0;
+    background-image: linear-gradient(360deg, $primary-color, transparent);
+  }
+  
+  &.top-scroll-hint:before,
+  &.bottom-scroll-hint:after {
+    opacity: 1;
+  }
+}
+
+.list {
+//   max-height: 4.5rem;
+  // scrollbar width
+  padding-right: 0.2rem;
+  margin-right: -0.2rem;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  
+  overflow: auto;
+}
+
+.event {
+  width: 100%;
+  padding: 0.2rem 0.5rem;
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  
+  border-radius: 0.3rem;
+  color: $primary-color;
+  background-color: $light-color;
+  
+  .event-name {
+    font-weight: 500;
+  }
+  .event-date {
+    font-size: 0.8em;
+    font-weight: 300;
+    opacity: 0.75;
+  }
+}

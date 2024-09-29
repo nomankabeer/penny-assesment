@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="login-box">
+      <div class="login-name">
+        <h1 *ngIf="isLogin; else titleTemplate">Login</h1>
+        <ng-template #titleTemplate>
+          <h1 *ngIf="isForgotPassword">Forgot Password</h1>
+          <h1 *ngIf="isResetPassword">Reset Password</h1>
+          <h1 *ngIf="!isForgotPassword && !isResetPassword">Signup</h1>
+        </ng-template>
+        <div class="underline-name"></div>
+      </div>
+  
+      <!-- Login Form -->
+      <form *ngIf="isLogin" (ngSubmit)="login()">
+        <div class="input-box">
+          <div class="inputs">
+            <input [(ngModel)]="email" type="email" name="email" placeholder="Email" required />
+            <div class="underline-input"></div>
+          </div>
+          <div class="inputs">
+            <input [(ngModel)]="password" type="password" name="password" placeholder="Password" required />
+            <div class="underline-input"></div>
+          </div>
+          <div class="submit-button">
+            <input type="submit" value="Login">
+          </div>
+          <div class="submit-button">
+            <input type="submit" (click)="switchToForgotPassword()" value="Forgot Password?">
+          </div>
+        </div>
+      </form>
+  
+      <!-- Forgot Password Form -->
+      <form *ngIf="isForgotPassword" (ngSubmit)="forgotPassword()">
+        <div class="input-box">
+          <div class="inputs">
+            <input [(ngModel)]="email" type="email" name="email" placeholder="Email" required />
+            <div class="underline-input"></div>
+          </div>
+          <div class="submit-button">
+            <input type="submit" value="Reset Password">
+          </div>
+        </div>
+        <input type="button" class="btn btn-link submit-button" (click)="switchToLogin()" value="Back to Login">
+      </form>
+  
+      <!-- Reset Password Form -->
+      <form *ngIf="isResetPassword" (ngSubmit)="resetPassword()">
+        <div class="input-box">
+          <div class="inputs">
+            <input [(ngModel)]="reset_password_code" type="number" name="reset_password_code" placeholder="Code" required />
+            <div class="underline-input"></div>
+          </div>
+          <div class="inputs">
+            <input [(ngModel)]="password" type="password" name="password" placeholder="New Password" required />
+            <div class="underline-input"></div>
+          </div>
+          <div class="inputs">
+            <input [(ngModel)]="confirm_password" type="password" name="confirm_password" placeholder="Confirm Password" required />
+            <div class="underline-input"></div>
+          </div>
+          <div class="submit-button">
+            <input type="submit" value="Reset Password">
+          </div>
+        </div>
+        <input type="button" class="btn btn-link submit-button" (click)="switchToLogin()" value="Back to Login">
+      </form>
+  
+      <!-- Signup Form -->
+      <form *ngIf="!isLogin && !isForgotPassword && !isResetPassword" (ngSubmit)="signup()">
+        <div class="input-box">
+          <div class="inputs">
+            <input [(ngModel)]="username" type="text" name="username" placeholder="Username" required />
+            <div class="underline-input"></div>
+          </div>
+          <div class="inputs">
+            <input [(ngModel)]="email" type="email" name="email" placeholder="Email" required />
+            <div class="underline-input"></div>
+          </div>
+          <div class="inputs">
+            <input [(ngModel)]="password" type="password" name="password" placeholder="Password" required />
+            <div class="underline-input"></div>
+          </div>
+          <div class="submit-button">
+            <input type="submit" value="Signup">
+          </div>
+        </div>
+    
+      </form>
+  
+      <!-- Toggle Between Signup and Login -->
+      <div class="mt-3">
+        <div class="submit-button">
+          <input *ngIf="isLogin && !isForgotPassword" type="submit" (click)="switchToSignup()" value="Don't have an account? Signup">
+          <input *ngIf="!isLogin && !isForgotPassword && !isResetPassword" type="submit" (click)="switchToLogin()" value="Already have an account? Login">
+        </div>
+      </div>
+    </div>
+  </div>
+  

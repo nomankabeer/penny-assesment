@@ -37,8 +37,8 @@ To get started with the project, follow these steps:
 ### Prerequisites
 - **Node.js** and **npm**: Ensure you have Node.js and npm installed. You can download it from [nodejs.org](https://nodejs.org/).
 - **Nx CLI**: Install the Nx CLI globally:
-  ```bash
-  npm install -g nx
+  ```bash 
+  npm install -g nx ```
 
 # Clone the Repository
 git clone https://github.com/nomankabeer/penny-assesment.git

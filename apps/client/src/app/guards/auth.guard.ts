@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth/services/auth.service';
 import { map, switchMap, take } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
       switchMap((token) => {
         if (!token) {
           const localStorageToken = localStorage.getItem('token');
+          console.log(localStorageToken, 'localStorageTokensdddddddddd')
           if (localStorageToken) {
             this.authService.resetStoreFromLocalStorage();
             token = localStorageToken;
@@ -25,7 +26,7 @@ export class AuthGuard implements CanActivate {
       map((token) => {
         console.log(token, 'Checking token in AuthGuard');
         if (!token) {
-          this.router.navigate(['/auth']);
+          this.router.navigate(['/auth/login']);
           return false;
         }
         return true;

@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ExceptionFilter, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './schemas/user.schema';
@@ -13,7 +13,7 @@ export class AuthService {
         private jwtService: JwtService
       ) {}
 
-  async register(username: string, email: string, password: string): Promise<any> {
+  async register(username: string, email: string, password: string): Promise<boolean | User> {
     // Check if the email already exists
     const existingUser = await this.findUserByEmail(email);
     if (existingUser) {
@@ -43,7 +43,7 @@ export class AuthService {
     return null;
   }
 
-  async resetPassword(reset_password_code: number, email: string, password: string, confirm_password: string): Promise<User | object> {
+  async resetPassword(reset_password_code: number, email: string, password: string, confirm_password: string): Promise<object> {
     if(password != confirm_password){
       return {status: false, message: 'password does not match'}
     }
@@ -61,7 +61,7 @@ export class AuthService {
     return {status: false, 'message': 'Incorrect Code'};
   }
 
-  async resetPasswordRequest(email: string): Promise<User | object> {
+  async resetPasswordRequest(email: string): Promise<object> {
     const user = await this.findUserByEmail(email);
     if (user) {
       const resetPasswordCode = Math.floor(1000 + Math.random() * 9000).toString();
@@ -74,16 +74,17 @@ export class AuthService {
     return {status: false, 'message': 'User Not Found'};
   }
 
-  async login(email: string, password: string): Promise<any> {
+  async login(email: string, password: string): Promise<object> {
     const user = await this.validateUser(email, password);
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
     const payload = { username: user.username, sub: user._id };
-    let token = this.jwtService.sign(payload, { expiresIn: '8h' })
+    let token = this.jwtService.sign(payload, { expiresIn: process.env.JWT_TOKEN_EXPIRE_TIME })
       
     return {
+      message: 'Login successful',
       access_token: token,
       user,
     };

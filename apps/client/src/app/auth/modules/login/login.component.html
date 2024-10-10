@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="login-box">
+    <div class="login-name">
+      <h1>Login</h1>
+      <div class="underline-name"></div>
+    </div>
+
+  
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="input-box">
+        <div class="inputs">
+          <input formControlName="email" type="email" placeholder="Email" />
+          <div class="underline-input"></div>
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email.</small>
+          </div>
+        </div>
+
+        <div class="inputs">
+          <input formControlName="password" type="password" placeholder="Password" />
+          <div class="underline-input"></div>
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+            <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 4 characters long.</small>
+          </div>
+        </div>
+
+        <div class="submit-button">
+          <input type="submit" value="Login" [disabled]="loginForm.invalid" />
+        </div>
+
+        <div class="">
+          <a href="/auth/forgot-password">Forgot Password?</a>
+        </div>
+        <div class="">
+          <a href="/auth/signup">SignUp</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

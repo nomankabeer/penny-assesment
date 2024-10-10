@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="login-box">
+    <div class="login-name">
+      <h1>Signup</h1>
+      <div class="underline-name"></div>
+    </div>
+
+    <!-- Bind the form with formGroup directive -->
+    <form [formGroup]="signupForm" (ngSubmit)="signup()">
+      <div class="input-box">
+        <div class="inputs">
+          <!-- Bind username input to formControlName -->
+          <input formControlName="username" type="text" placeholder="Username" />
+          <div class="underline-input"></div>
+          <!-- Display validation error for username -->
+          <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched">
+            <small *ngIf="signupForm.get('username')?.errors?.['required']">Username is required.</small>
+          </div>
+        </div>
+
+        <div class="inputs">
+          <!-- Bind email input to formControlName -->
+          <input formControlName="email" type="email" placeholder="Email" />
+          <div class="underline-input"></div>
+          <!-- Display validation error for email -->
+          <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+            <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format.</small>
+          </div>
+        </div>
+
+        <div class="inputs">
+          <!-- Bind password input to formControlName -->
+          <input formControlName="password" type="password" placeholder="Password" />
+          <div class="underline-input"></div>
+          <!-- Display validation error for password -->
+          <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+            <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</small>
+            <small *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 4 characters long.</small>
+          </div>
+        </div>
+
+        <div class="submit-button">
+          <!-- Disable submit button if form is invalid -->
+          <input type="submit" value="Signup" [disabled]="signupForm.invalid">
+        </div>
+        <a href="/auth/login">Back to Login</a>
+      </div>
+    </form>
+  </div>
+</div>

@@ -14,7 +14,7 @@ import { jwtConstants } from './jwt/constants'; // Replace with your actual cons
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '8h' },
+      signOptions: { expiresIn: process.env.JWT_TOKEN_EXPIRE_TIME },
     }),
   ],
   controllers: [AuthController],

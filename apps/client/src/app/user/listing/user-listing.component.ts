@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';  // Import take operator
-import { UserService } from './user-listing.service';
+
 
 import { CommonModule } from '@angular/common';
+import { UserService } from './user-listing.service';
 @Component({
   selector: 'app-user-listing',
   templateUrl: './user-listing.component.html',
@@ -20,7 +21,7 @@ export class UserListingComponent {
   users: any[] = [];
   logout() {
     this.authService.logout(); 
-    this.router.navigate(['/auth']);
+    this.router.navigate(['/auth/login']);
   }
 
   

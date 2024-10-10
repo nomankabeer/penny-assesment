@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { loginSuccess, logout } from '../store/auth.actions';
-import { selectToken } from '../store/auth.selectors';
+import { loginSuccess, logout } from '../../store/auth.actions';
+import { selectToken } from '../../store/auth.selectors';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
